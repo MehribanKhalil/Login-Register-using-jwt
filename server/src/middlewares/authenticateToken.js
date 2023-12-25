@@ -9,7 +9,7 @@ function authenticateToken(req, res, next) {
   }
   const decoded = jwt.verify(token, secretKey);
 
-  if (!decoded || decoded.role == "admin") {
+  if (!decoded || decoded.role !== "admin") {
     return res.status(400).json("Invalid token");
   }
   next();
