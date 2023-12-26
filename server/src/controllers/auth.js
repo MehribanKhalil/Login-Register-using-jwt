@@ -15,7 +15,7 @@ export const userRegister = async (req, res) => {
     await user.save();
     res.status(201).json({ message: "user created" });
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -34,10 +34,10 @@ export const userLogin = async (req, res) => {
       res.status(404).json({ message: "Passord doesnt match" });
     }
     const token = jwt.sign({ username: user.username, userId: user._id ,role:user.role }, secretKey, { expiresIn: "1h" });
-    res.send(token)
+    res.json(token)
 
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: error.message});
   }
 };
 

@@ -1,0 +1,13 @@
+.navbar{
+    display: flex; 
+    justify-content: between;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.navbar .nav-item{
+    padding-right: 20px;
+}
