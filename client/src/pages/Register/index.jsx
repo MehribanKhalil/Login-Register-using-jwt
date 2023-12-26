@@ -1,31 +1,21 @@
 import React, { useState } from "react";
+import { AuthContext, useAuth } from "../../context/authContext";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState({
-    username: "",
-    password: "",
-  });
-  console.log(data);
-  // const signup = async (username, password) => {
-  //   const response = await fetch("http://localhost:5000/api/auth/register", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ username, password }),
-  //   });
-  //   const data = await response.json();
-  //   console.log(data);
-  // };
+  const navigate = useNavigate();
+  const { signup } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setData({
-      username: username,
-      password: password
-    })
-    
-    // signup(username,password)
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await signup(username, password);
+      navigate("/Profile");
+    } catch (error) {
+      console.log(error.res.data.message);
+    }
   };
 
   return (

@@ -6,18 +6,21 @@ import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import PrivateRoute from "./router/PrivateRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />}  />
-          <Route path="/LogIn" element={<LogIn />}  />
-          <Route path="/Register" element={<Register />}  />
-          <Route path="/Profile" element={<Profile />}  />
+          <Route path="/" element={<Home />} />
+          <Route path="/LogIn" element={<LogIn />} />
+          <Route path="/Register" element={<Register />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/Profile" element={<Profile />} />
+          </Route>
         </Route>
-      </Routes> 
+      </Routes>
     </BrowserRouter>
   );
 }

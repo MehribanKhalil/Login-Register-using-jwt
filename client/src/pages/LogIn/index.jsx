@@ -1,26 +1,22 @@
 import React from "react";
 import { useState } from "react";
+import { useAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
+
 const LogIn = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-
-  const handleLogin = async (username, password) => {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await response.json();
-    console.log(data);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setPassword('')
-    setUserName("")
-    console.log(username, password);
-    handleLogin(username,password)
+  const { login } = useAuth();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await login(username, password);
+      navigate("/");
+    } catch (error) {
+      console.log(error.res.data.message);
+    }
   };
 
   return (
