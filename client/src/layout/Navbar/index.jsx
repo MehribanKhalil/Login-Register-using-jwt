@@ -1,15 +1,31 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import './index.css'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./index.css";
+import { useAuth } from "../../context/authContext";
 const Navbar = () => {
+  const { user } = useAuth();
   return (
-    <nav className='navbar'>
-      <NavLink className='nav-item' to={'/'}>Home</NavLink>
-      <NavLink className='nav-item' to={'/LogIn'}>LogIn</NavLink>
-      <NavLink className='nav-item' to={'/Register'}>Register</NavLink>
-      <NavLink className='nav-item' to={'/Profile'}>Profile</NavLink>
-    </nav>
-  )
-}
+    <nav className="navbar">
+      <NavLink className="nav-item" to={"/"}>
+        Home
+      </NavLink>
+      {user ? (
+        <NavLink className="nav-item" to={"/Profile"}>
+          Profile
+        </NavLink>
+      ) : (
+        <>
+          <NavLink className="nav-item" to={"/LogIn"}>
+            LogIn
+          </NavLink>
+          <NavLink className="nav-item" to={"/Register"}>
+            Register
+          </NavLink>
+        </>
+      )}
 
-export default Navbar
+    </nav>
+  );
+};
+
+export default Navbar;

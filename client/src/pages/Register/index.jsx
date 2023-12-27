@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AuthContext, useAuth } from "../../context/authContext";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const Register = () => {
   const [username, setUserName] = useState("");
@@ -43,6 +43,7 @@ const Register = () => {
             <button>SignUp</button>
           </div>
         </form>
+        <p>Already have a Account? <span className="login" onClick={()=>navigate('/Login')}>Login</span></p>
       </div>
     </div>
   );

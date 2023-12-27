@@ -1,14 +1,16 @@
 import React from 'react'
-import { useContext } from 'react'
-import { AuthContext } from '../../context/authContext'
+import { useAuth } from '../../context/authContext'
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const {user} = useContext(AuthContext)
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>Profile</h1>
-      <h2>{user && user.username}</h2>
-      
+      <h2> Hi, {user && user.username}</h2>
+      <button onClick={logout}>logout</button>
     </div>
   )
 }
