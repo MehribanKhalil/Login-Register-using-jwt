@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile</h1>
-      <h2> Hi, {user && user.username}</h2>
+       {user && <h2> Hi,  {user.username}</h2>}
       <button onClick={logout}>logout</button>
     </div>
   )

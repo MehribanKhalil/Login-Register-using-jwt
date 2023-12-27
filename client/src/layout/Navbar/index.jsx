@@ -24,6 +24,11 @@ const Navbar = () => {
         </>
       )}
 
+      {user.role === "admin" && (
+        <NavLink className="nav-item" to={"/Admin"}>
+          AdminPanel
+        </NavLink>
+      )}
     </nav>
   );
 };

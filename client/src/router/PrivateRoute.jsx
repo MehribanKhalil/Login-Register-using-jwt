@@ -4,9 +4,13 @@ import LogIn from "../pages/LogIn";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
-function PrivateRoute() {
+function PrivateRoute({ role }) {
   const { user } = useContext(AuthContext);
-  return user ? <Outlet /> : <Navigate to={"/Register"} />;
+  return user && role.includes(user.role) ? (
+    <Outlet />
+  ) : (
+    <Navigate to={"/Register"} />
+  );
 }
 
 export default PrivateRoute;
