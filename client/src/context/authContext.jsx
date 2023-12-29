@@ -7,6 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = UseLocalStorage("user", null);
+  const [token, setToken] = UseLocalStorage("token", null);
 
   const signup = async (username, password) => {
     try {
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       const data = response.data;
       const decoded = jwtDecode(data.token);
       setUser(decoded);
+      setToken(data.token)
       UseLocalStorage("user", user);
     } catch (error) {
       console.log(error.response?.data);
@@ -51,8 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signup, login, logout, user, setUser}}
-    >
+      value={{ signup, login, logout, user, setUser,token}}>
       {children}
     </AuthContext.Provider>
   );

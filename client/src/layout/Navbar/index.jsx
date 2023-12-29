@@ -24,7 +24,7 @@ const Navbar = () => {
         </>
       )}
 
-      {user.role === "admin" && (
+      {user?.role === "admin" && (
         <NavLink className="nav-item" to={"/Admin"}>
           AdminPanel
         </NavLink>

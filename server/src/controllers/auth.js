@@ -35,9 +35,6 @@ export const userLogin = async (req, res) => {
     if (!user) {
       res.status(404).json({ message: "user not found" });
     }
-    if (!username) {
-      res.status(404).json({ message: "Username not found" });
-    }
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       res.status(401).json({ message: "Password doesn't match" });
@@ -53,20 +50,3 @@ export const userLogin = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// Middleware
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers["authorization"];
-//   const token = authHeader && authHeader.split(" ")[1];
-
-//   if (!token) {
-//     return res.status(401).json({ message: "No token provided" });
-//   }
-//   jwt.verify(token, secretKey, (err, decoded) => {
-//     if (err) {
-//       return res.status(403).json({ message: "Invalid token" });
-//     }
-//     req.user = decoded;
-//     next();
-//   });
-// }
